@@ -1,0 +1,25 @@
+version: 1
+services:
+  - name: rio-fmcg-website
+    type: web
+    env: node
+    plan: free
+    region: oregon
+    repo: kalihello541-cloud/rio_fmcg_try_demo
+    branch: main
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: https://otwohdxdmegvthauphuq.supabase.co
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        value: SET_IN_RENDER_DASHBOARD
+      - key: NEXT_PUBLIC_ZALO_CHAT_LINK
+        value: https://zalo.me/s/botcreator/
+    secretEnvs:
+      - key: ZALO_BOT_TOKEN
+      - key: ZALO_BOT_WEBHOOK_SECRET
+    healthCheckPath: /api/zalo/webhook
+    autoDeploy: true

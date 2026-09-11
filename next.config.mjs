@@ -9,6 +9,7 @@ const securityHeaders = [
 
 const nextConfig = {
   poweredByHeader: false,
+  output: "standalone",
   async headers() {
     return [
       {

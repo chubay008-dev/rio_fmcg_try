@@ -7,6 +7,41 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          phone: data.get("phone"),
+          email: data.get("email"),
+          message: data.get("message"),
+        }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json();
+        throw new Error(body.error || "Submission failed");
+      }
+
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Submission failed");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <section id="lien-he" className="relative py-24 sm:py-32">
@@ -60,10 +95,7 @@ export function Contact() {
 
         <Reveal delay={0.1}>
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
+            onSubmit={handleSubmit}
             className="glass rounded-4xl p-8 shadow-glass"
           >
             {sent ? (
@@ -79,49 +111,68 @@ export function Contact() {
                 </p>
               </div>
             ) : (
-              <div className="grid gap-5">
-                <div className="grid gap-5 sm:grid-cols-2">
+              <>
+                {error && (
+                  <div className="mb-4 rounded-xl bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-400">
+                    {error}
+                  </div>
+                )}
+                <div className="grid gap-5">
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <label className="block">
+                      <span className="text-xs font-medium text-ink/60 dark:text-cream/60">Họ và tên</span>
+                      <input
+                        required
+                        type="text"
+                        name="name"
+                        placeholder="Nguyễn Văn A"
+                        disabled={loading}
+                        className="mt-1.5 w-full rounded-2xl border border-forest/15 bg-white/70 px-4 py-3 text-sm outline-none transition-colors focus:border-leaf dark:border-cream/15 dark:bg-white/5 dark:text-cream"
+                      />
+                    </label>
+                    <label className="block">
+                      <span className="text-xs font-medium text-ink/60 dark:text-cream/60">Số điện thoại</span>
+                      <input
+                        required
+                        type="tel"
+                        name="phone"
+                        placeholder="09xx xxx xxx"
+                        disabled={loading}
+                        className="mt-1.5 w-full rounded-2xl border border-forest/15 bg-white/70 px-4 py-3 text-sm outline-none transition-colors focus:border-leaf dark:border-cream/15 dark:bg-white/5 dark:text-cream"
+                      />
+                    </label>
+                  </div>
                   <label className="block">
-                    <span className="text-xs font-medium text-ink/60 dark:text-cream/60">Họ và tên</span>
+                    <span className="text-xs font-medium text-ink/60 dark:text-cream/60">Email</span>
                     <input
                       required
-                      type="text"
-                      placeholder="Nguyễn Văn A"
+                      type="email"
+                      name="email"
+                      placeholder="ban@congty.com"
+                      disabled={loading}
                       className="mt-1.5 w-full rounded-2xl border border-forest/15 bg-white/70 px-4 py-3 text-sm outline-none transition-colors focus:border-leaf dark:border-cream/15 dark:bg-white/5 dark:text-cream"
                     />
                   </label>
                   <label className="block">
-                    <span className="text-xs font-medium text-ink/60 dark:text-cream/60">Số điện thoại</span>
-                    <input
+                    <span className="text-xs font-medium text-ink/60 dark:text-cream/60">Nội dung</span>
+                    <textarea
                       required
-                      type="tel"
-                      placeholder="09xx xxx xxx"
-                      className="mt-1.5 w-full rounded-2xl border border-forest/15 bg-white/70 px-4 py-3 text-sm outline-none transition-colors focus:border-leaf dark:border-cream/15 dark:bg-white/5 dark:text-cream"
+                      name="message"
+                      rows={4}
+                      placeholder="Bạn muốn hợp tác phân phối, đặt hàng sỉ hay góp ý về sản phẩm?"
+                      disabled={loading}
+                      className="mt-1.5 w-full resize-none rounded-2xl border border-forest/15 bg-white/70 px-4 py-3 text-sm outline-none transition-colors focus:border-leaf dark:border-cream/15 dark:bg-white/5 dark:text-cream"
                     />
                   </label>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="btn-primary mt-1 w-full sm:w-fit disabled:opacity-50"
+                  >
+                    {loading ? "Đang gửi..." : "Gửi liên hệ"} <Send size={15} />
+                  </button>
                 </div>
-                <label className="block">
-                  <span className="text-xs font-medium text-ink/60 dark:text-cream/60">Email</span>
-                  <input
-                    required
-                    type="email"
-                    placeholder="ban@congty.com"
-                    className="mt-1.5 w-full rounded-2xl border border-forest/15 bg-white/70 px-4 py-3 text-sm outline-none transition-colors focus:border-leaf dark:border-cream/15 dark:bg-white/5 dark:text-cream"
-                  />
-                </label>
-                <label className="block">
-                  <span className="text-xs font-medium text-ink/60 dark:text-cream/60">Nội dung</span>
-                  <textarea
-                    required
-                    rows={4}
-                    placeholder="Bạn muốn hợp tác phân phối, đặt hàng sỉ hay góp ý về sản phẩm?"
-                    className="mt-1.5 w-full resize-none rounded-2xl border border-forest/15 bg-white/70 px-4 py-3 text-sm outline-none transition-colors focus:border-leaf dark:border-cream/15 dark:bg-white/5 dark:text-cream"
-                  />
-                </label>
-                <button type="submit" className="btn-primary mt-1 w-full sm:w-fit">
-                  Gửi liên hệ <Send size={15} />
-                </button>
-              </div>
+              </>
             )}
           </form>
         </Reveal>
