@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --header-h: 112px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  @apply bg-cream text-ink font-body antialiased;
+}
+
+.dark body {
+  @apply bg-forest-dark text-cream;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-display;
+}
+
+.container-rio {
+  @apply mx-auto w-full max-w-[1240px] px-6 sm:px-8 lg:px-10;
+}
+
+.glass {
+  @apply border border-white/40 bg-white/50 backdrop-blur-xl;
+}
+
+.dark .glass {
+  @apply border-white/10 bg-white/5;
+}
+
+.eyebrow {
+  @apply inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.22em] text-leaf-dark;
+}
+
+.dark .eyebrow {
+  @apply text-gold;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-forest px-7 py-3.5 text-sm font-semibold text-cream shadow-glass transition-all duration-300 hover:-translate-y-0.5 hover:bg-leaf-dark active:translate-y-0;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-forest/20 bg-transparent px-7 py-3.5 text-sm font-semibold text-forest transition-all duration-300 hover:-translate-y-0.5 hover:border-forest/40 hover:bg-forest/5;
+}
+
+.dark .btn-ghost {
+  @apply border-cream/25 text-cream hover:bg-cream/10;
+}
+
+/* Bubble field used behind the hero bottle and in ambient backgrounds */
+.bubble {
+  position: absolute;
+  bottom: -40px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.9),
+    rgba(124, 191, 142, 0.25) 60%,
+    rgba(124, 191, 142, 0.05) 100%
+  );
+  animation-name: rise;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: #4c9a6a;
+  color: #fbf6ec;
+}
