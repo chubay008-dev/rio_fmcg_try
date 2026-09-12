@@ -6,7 +6,7 @@ services:
     env: node
     plan: free
     region: oregon
-    repo: chubay008-dev/rio_fmcg_try
+    repo: https://github.com/chubay008-dev/rio_fmcg_try
     branch: main
 
     buildCommand: npm ci && npm run build
