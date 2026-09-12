@@ -5,7 +5,7 @@ services:
     env: node
     plan: free
     region: oregon
-    repo: kalihello541-cloud/rio_fmcg_try_demo
+    repo: chubay008-dev/rio_fmcg_try
     branch: main
     buildCommand: npm ci && npm run build
     startCommand: npm start
