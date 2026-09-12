@@ -1,4 +1,5 @@
 version: 1
+
 services:
   - name: rio-fmcg-website
     type: web
@@ -7,19 +8,28 @@ services:
     region: oregon
     repo: chubay008-dev/rio_fmcg_try
     branch: main
+
     buildCommand: npm ci && npm run build
     startCommand: npm start
+
     envVars:
       - key: NODE_VERSION
         value: "20"
+
       - key: NEXT_PUBLIC_SUPABASE_URL
         value: https://otwohdxdmegvthauphuq.supabase.co
+
       - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
-        value: SET_IN_RENDER_DASHBOARD
+        sync: false
+
       - key: NEXT_PUBLIC_ZALO_CHAT_LINK
-        value: https://zalo.me/s/botcreator/
-    secretEnvs:
+        value: https://zalo.me/r/botcreator/
+
       - key: ZALO_BOT_TOKEN
+        sync: false
+
       - key: ZALO_BOT_WEBHOOK_SECRET
+        sync: false
+
     healthCheckPath: /api/zalo/webhook
     autoDeploy: true
