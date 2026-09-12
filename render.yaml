@@ -26,10 +26,10 @@ services:
         value: https://zalo.me/r/botcreator/
 
       - key: ZALO_BOT_TOKEN
-        sync: false
+        value: 4519661879217951552:xiFRyBHlTJtBwDoEjvzfeZcjtLXVPtbHBfIOEWRshccqQpLRHbrkNXBrYYaayzwP
 
       - key: ZALO_BOT_WEBHOOK_SECRET
-        sync: false
+        value: rioasia@2026
 
     healthCheckPath: /api/zalo/webhook
     autoDeploy: true
