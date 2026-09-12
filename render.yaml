@@ -1,7 +1,7 @@
 version: 1
 
 services:
-  - name: rio-fmcg-website
+  - name: rioasia
     type: web
     env: node
     plan: free
