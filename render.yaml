@@ -17,10 +17,10 @@ services:
         value: "20"
 
       - key: NEXT_PUBLIC_SUPABASE_URL
-        value: https://otwohdxdmegvthauphuq.supabase.co
+        value: https://kilhcgsanxqocussxuqb.supabase.co
 
       - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
-        sync: false
+        value: sb_publishable_L6vHPvlw9JgLL_00bgaITg_RBflwG5p
 
       - key: NEXT_PUBLIC_ZALO_CHAT_LINK
         value: https://zalo.me/r/botcreator/
