@@ -23,7 +23,7 @@ services:
         value: sb_publishable_L6vHPvlw9JgLL_00bgaITg_RBflwG5p
 
       - key: NEXT_PUBLIC_ZALO_CHAT_LINK
-        value: https://zalo.me/r/botcreator/
+        value: https://zalo.me/s/botcreator/
 
       - key: ZALO_BOT_TOKEN
         value: 4519661879217951552:xiFRyBHlTJtBwDoEjvzfeZcjtLXVPtbHBfIOEWRshccqQpLRHbrkNXBrYYaayzwP
