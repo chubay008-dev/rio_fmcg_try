@@ -4,7 +4,7 @@ export const site = {
   tagline: "Vị trái cây thật, chút men say nhẹ, đúng lúc cần thư giãn",
   domain: "https://rio-drinks.vn",
   phone: "0907 449 967",
-  email: "uythanhhoang@gmail.com",
+  email: "chubay008@gmail.com",
   address: "TP. Hồ Chí Minh",
   hours: "Thứ 2 – Thứ 7, 8:00 – 18:00",
   abv: "4.2% – 4.5% vol tuỳ vị",

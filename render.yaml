@@ -31,5 +31,11 @@ services:
       - key: ZALO_BOT_WEBHOOK_SECRET
         value: rioasia@2026
 
+      - key: RESEND_API_KEY
+        value: RESEND_API_KEY
+
+      - key: EMAIL_SELLER
+        value: chubay008@gmail.com
+
     healthCheckPath: /api/zalo/webhook
     autoDeploy: true
